@@ -1,109 +1,139 @@
-# PDF Threat Scanner - Modern Version
+# PDF Threat Scanner
 
-## Requirements (requirements.txt)
-```
-PyQt5>=5.15.0
-```
+[![PyPI version](https://img.shields.io/pypi/v/pdf-threat-scanner.svg)](https://pypi.org/project/pdf-threat-scanner)  
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](./LICENSE)  
+[![Python versions](https://img.shields.io/pypi/pyversions/pdf-threat-scanner.svg)](https://pypi.org/project/pdf-threat-scanner)
 
-## Setup Instructions
+A modern, user-friendly desktop application to scan PDF files for potential threats and risky features. Built with PyQt5 for a smooth GUI experience and DidierStevens’ `pdfid.py` for deep PDF analysis.
 
-### 1. Install Dependencies
-```bash
-pip install PyQt5
-```
+---
 
-### 2. Install pdfid Tool
-You need to install the pdfid tool for PDF analysis:
+## 📋 Table of Contents
 
-**Option A: Download from DidierStevens**
-```bash
-# Download pdfid
-wget https://github.com/DidierStevens/DidierStevensSuite/raw/master/pdfid.py
-mkdir -p pdfid/pdfid
-mv pdfid.py pdfid/pdfid/
-```
+- [✨ Features](#-features)  
+- [🚀 Quick Start](#-quick-start)  
+  - [Prerequisites](#prerequisites)  
+  - [Installation](#installation)  
+- [⚙️ Usage](#️-usage)  
+- [🛠️ Configuration](#️-configuration)  
+- [📦 Installers](#-installers)  
+- [📊 Threat Levels](#-threat-levels)  
+- [⚙️ Advanced](#️-advanced)  
+- [🤝 Contributing](#-contributing)  
+- [📄 License](#-license)  
+- [✉️ Contact](#️-contact)
 
-**Option B: Clone the repository**
-```bash
-git clone https://github.com/DidierStevens/DidierStevensSuite.git
-mkdir -p pdfid/pdfid
-cp DidierStevensSuite/pdfid.py pdfid/pdfid/
-```
+---
 
-### 3. Directory Structure
-Your project should look like this:
-```
-pdf_scanner/
-├── backend.py          # Enhanced backend with proper error handling
-├── gui.py             # Modern GUI with beautiful design
-├── pdfid/
-│   └── pdfid/
-│       └── pdfid.py   # PDF analysis tool
-└── requirements.txt
-```
+## ✨ Features
 
-### 4. Run the Application
-```bash
-python gui.py
-```
+- **Drag & Drop** or **Browse** for PDF files  
+- **Real-time** threat scanning with progress bar  
+- **Color-coded** threat-level cards (Safe → Critical)  
+- **Detailed** PDF structure breakdown on demand  
+- **Export** scan results to JSON  
+- **History** panel to revisit past scans  
+- **MVC-based** code architecture for easy extension  
+- **Cross-platform**: Windows, macOS, Linux  
 
-## Key Improvements Made
+---
 
-### 🐛 Bug Fixes
-- **Fixed threading issues**: Proper QThread usage prevents GUI freezing
-- **Robust error handling**: Comprehensive exception handling with user feedback
-- **Memory management**: Proper widget cleanup and resource management
-- **File validation**: Better PDF file detection and validation
-- **Path resolution**: Enhanced pdfid.py discovery with multiple fallback locations
+## 🚀 Quick Start
 
-### 🎨 UI/UX Improvements
-- **Modern design**: Beautiful gradients, rounded corners, and smooth animations
-- **Intuitive interface**: Clear visual hierarchy and user-friendly layout
-- **Drag & drop enhancement**: Visual feedback with hover effects and animations
-- **Progress indication**: Real-time progress updates during scanning
-- **Result cards**: Beautiful, collapsible cards showing scan results with color-coded threat levels
-- **Responsive design**: Proper sizing and scrolling for different window sizes
+### Prerequisites
 
-### ✨ New Features
-- **Threat level assessment**: 5-level threat classification (Safe → Critical)
-- **Smart recommendations**: Context-aware security advice
-- **Scan history**: Keep track of all scanned files
-- **Export functionality**: Save results to JSON format
-- **Statistics tracking**: Real-time stats on scanned files and threats
-- **Menu system**: Full menu bar with shortcuts
-- **About dialog**: Comprehensive help and information
-- **File browsing**: Click to browse option alongside drag & drop
+- Python 3.8+ (if running source code)  
+- [pdfid.py](https://github.com/DidierStevens/DidierStevensSuite) by Didier Stevens  
 
-### 🔧 Technical Enhancements
-- **Better architecture**: Separation of concerns with proper MVC pattern
-- **Type hints**: Full type annotations for better code maintainability
-- **Dataclasses**: Clean data structures for scan results
-- **Enums**: Type-safe threat level definitions
-- **Performance**: Efficient scanning with timeout controls
-- **Extensibility**: Easy to add new threat detection rules
+### Installation
 
-### 🎯 User Experience
-- **No more freezing**: Non-blocking operations with proper threading
-- **Clear feedback**: Always know what's happening with status updates
-- **Visual appeal**: Modern, professional appearance that users will enjoy
-- **Accessibility**: Proper contrast ratios and readable fonts
-- **Error recovery**: Graceful handling of failures with helpful messages
+You can either run the program from source or install one of the prebuilt binaries below.
 
-## Usage Guide
+---
 
-1. **Launch**: Run `python gui.py`
-2. **Scan files**: Drag & drop PDF files or click "Browse Files"
-3. **View results**: Results appear as cards with color-coded threat levels
-4. **Explore details**: Click "Show Details" to see technical analysis
-5. **Export data**: Use File → Export Results to save scan data
-6. **Clear history**: Use View → Clear Results to reset
+## 📦 Installers
 
-## Threat Levels Explained
+For easy installation, prebuilt installers are available for the most popular platforms:
 
-- 🟢 **SAFE**: No threats detected
-- ⚪ **LOW**: Minor issues that are generally harmless
-- 🟡 **MEDIUM**: Features that could be concerning
-- 🟠 **HIGH**: Dangerous features requiring caution
-- 🔴 **CRITICAL**: Severe threats - avoid opening
+- **Windows:** `pdf-threat-scanner-x.y.z.exe`  
+- **Debian/Ubuntu:** `pdf-threat-scanner-x.y.z.deb`  
+- **Fedora/RedHat:** `pdf-threat-scanner-x.y.z.rpm`
 
-The application is now production-ready with professional UI/UX and robust functionality!
+Download the latest installer from the [Releases](https://github.com/ErfanNahidi/pdf_scanner/releases) page and follow your OS’s standard installation procedure.
+
+---
+
+## ⚙️ Usage
+
+### From Source
+
+1. Clone the repo and install dependencies:
+   ```bash
+   git clone https://github.com/ErfanNahidi/pdf_scanner.git
+   cd pdf_scanner
+   pip install -r requirements.txt
+    ````
+
+2. Download or place `pdfid.py` in the `pdfid/pdfid/` folder.
+3. Run the GUI:
+
+   ```bash
+   python gui.py
+   ```
+
+### From Installer
+
+* Launch the installed application from your OS menu or desktop shortcut.
+* Use drag & drop or browse to scan PDF files for threats.
+
+---
+
+## 🛠️ Configuration
+
+* Scan timeout, logging levels, and custom threat rules can be adjusted in the `backend.py` file.
+* Add new detection rules by subclassing `ThreatRule` in `backend.py`.
+
+---
+
+## 📊 Threat Levels
+
+| Level        | Description                                         |
+| ------------ | --------------------------------------------------- |
+| **SAFE**     | No suspicious elements found                        |
+| **LOW**      | Harmless anomalies (e.g., metadata quirks)          |
+| **MEDIUM**   | Potentially unwanted features (e.g., JavaScript)    |
+| **HIGH**     | Dangerous constructs (e.g., embedded executables)   |
+| **CRITICAL** | Severe threats — avoid opening without verification |
+
+---
+
+## ⚙️ Advanced
+
+* Build standalone executables with [PyInstaller](https://www.pyinstaller.org/)
+* Extend scanning rules by editing `backend.py`
+* Integrate CLI functionality if needed
+
+---
+
+## 🤝 Contributing
+
+Contributions are very welcome!
+
+1. Fork this repo
+2. Create a feature branch: `git checkout -b feature/YourFeature`
+3. Commit your changes: `git commit -m "Add new feature"`
+4. Push the branch: `git push origin feature/YourFeature`
+5. Open a Pull Request — I’ll review it with ❤️
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
+
+---
+
+## ✉️ Contact
+
+Erfan Nahidi • \[[erfannahidi20@gmail.com](erfannahidi20@gmail.com)]
+Feel free to reach out with questions, feedback, or just to say hi!
