@@ -1,0 +1,43 @@
+name: Build Windows Installer
+
+on:
+  push:
+    tags: [ 'v*' ]     # run on version tags, e.g. v1.0.0
+  workflow_dispatch:
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.13'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pyinstaller
+
+      - name: Build executables
+        run: |
+          pyinstaller --clean PDFScanner.spec
+
+      - name: Install Inno Setup
+        uses: crazy-max/ghaction-isetup@v1
+
+      - name: Build Inno Setup installer
+        run: |
+          iscc installer.iss
+
+      - name: Upload Windows artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: PDFScanner-Windows
+          path: |
+            dist/PDFScanner-GUI.exe
+            dist/PDFScanner-CLI.exe
+            installer/Output/YourInstaller.exe  # adjust path to your .exe installer

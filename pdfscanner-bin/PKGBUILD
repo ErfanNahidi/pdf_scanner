@@ -1,0 +1,16 @@
+pkgname=pdfscanner-bin
+pkgver=1.0.0
+pkgrel=1
+pkgdesc="PDF Threat Scanner"
+arch=('x86_64')
+url="https://github.com/ErfanNahidi/pdf_scanner"
+license=('MIT')
+depends=('python')
+source=("pdfscanner" "backend.py" "pdfid")
+sha256sums=('SKIP' 'SKIP' 'SKIP')
+
+package() {
+    install -Dm755 "$srcdir/pdfscanner" "$pkgdir/usr/bin/pdfscanner"
+    install -Dm644 "$srcdir/backend.py" "$pkgdir/usr/share/pdfscanner/backend.py"
+    cp -r "$srcdir/pdfid" "$pkgdir/usr/share/pdfscanner/pdfid"
+}
