@@ -2,7 +2,7 @@
 
 ## Overview
 
-A modern PDF threat scanning tool with PyQt6 GUI, advanced PDF analysis via `pdfid`, and robust threading for smooth performance.
+A modern PDF threat scanning tool with PySide6 GUI, advanced PDF analysis via `pdfid`, and robust threading for smooth performance.
 
 ## Project Structure
 
