@@ -8,6 +8,8 @@ A modern, cross-platform desktop application designed to quickly analyze PDF fil
 
 Created by **Erfan Nahidi**.
 
+> 🔗 [نسخه فارسی README را اینجا ببینید](https://github.com/ErfanNahidi/pdf_scanner/blob/main/readme_fa.md)
+
 ---
 
 
