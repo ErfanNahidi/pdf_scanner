@@ -8,7 +8,7 @@
 
 ساخته‌شده توسط **عرفان ناهیدی**.
 
-> 🔗 [See the Persian version of the README here](https://github.com/ErfanNahidi/pdf_scanner/blob/main/readme.md)
+> 🔗 [See the English version of the README here](https://github.com/ErfanNahidi/pdf_scanner/blob/main/readme.md)
 --
 ---
 
