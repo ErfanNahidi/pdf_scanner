@@ -1,7 +1,7 @@
 # PDF Threat Scanner
 
 ![Version](https://img.shields.io/badge/Version-4.0.0-5865F2)
-![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20%20Linux-blue)
+![Platform](https://img.shields.io/badge/Platform-Windows%20%7C%20Linux%20%7C%20Mac-blue)
 ![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
 
 A modern, cross-platform desktop application designed to quickly analyze PDF files for potential security threats. Built with Python and PySide6, this tool provides a user-friendly interface to detect suspicious elements like embedded JavaScript, automatic actions, and external links — helping users make informed decisions before opening potentially malicious documents.
