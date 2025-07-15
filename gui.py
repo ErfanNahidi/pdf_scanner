@@ -1,6 +1,7 @@
 import sys
 from pathlib import Path
 import webbrowser
+import multiprocessing
 from PySide6.QtWidgets import (
     QApplication, QMainWindow, QWidget, QVBoxLayout, QHBoxLayout,
     QLabel, QPushButton, QFrame, QFileDialog,
@@ -429,11 +430,27 @@ class PDFThreatScannerApp(QMainWindow):
     def _save_settings(self): settings = QSettings("MyCompany","PDFScanner"); settings.setValue("theme",theme_manager.theme)
     def closeEvent(self, e): self._save_settings(); self.cancel_or_clear_scan(); e.accept()
 
-def main():
-    app = QApplication(sys.argv); app.setStyle('Fusion'); app.setApplicationName("PDFThreatScanner")
-    pixmap = QPixmap(128, 128); pixmap.fill(Qt.GlobalColor.transparent)
-    p = QPainter(pixmap); p.setFont(QFont("Segoe UI Emoji", 80)); p.drawText(pixmap.rect(), Qt.AlignmentFlag.AlignCenter, "🛡️"); p.end()
-    app.setWindowIcon(QIcon(pixmap)); window = PDFThreatScannerApp(); window.show(); sys.exit(app.exec())
-
 if __name__ == "__main__":
-    main()
+    # This guard prevents the app from relaunching itself.
+    multiprocessing.freeze_support()
+
+    # Application startup code is now directly inside the guard.
+    app = QApplication(sys.argv)
+    app.setStyle('Fusion')
+    app.setApplicationName("PDFThreatScanner")
+
+    # Create the window icon
+    pixmap = QPixmap(128, 128)
+    pixmap.fill(Qt.GlobalColor.transparent)
+    p = QPainter(pixmap)
+    p.setFont(QFont("Segoe UI Emoji", 80))
+    p.drawText(pixmap.rect(), Qt.AlignmentFlag.AlignCenter, "🛡️")
+    p.end()
+    app.setWindowIcon(QIcon(pixmap))
+
+    # Create and show the main window
+    window = PDFThreatScannerApp()
+    window.show()
+
+    # Start the application event loop
+    sys.exit(app.exec())

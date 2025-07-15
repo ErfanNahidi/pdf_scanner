@@ -37,9 +37,7 @@ class PDFScanner:
     WARNING_FILE_SIZE_MB = 100  # Warning threshold
     LARGE_FILE_SIZE_MB = 500   # Large file threshold
     
-    # Performance settings
-    CPU_COUNT = multiprocessing.cpu_count()
-    MAX_WORKERS = min(6, CPU_COUNT)
+
     
     THREAT_DEFINITIONS = {
         # Critical threats - immediate danger
@@ -64,26 +62,36 @@ class PDFScanner:
         self.pdfid_path = self._find_pdfid()
         self.python_executable = self._get_python_executable()
         self.system = platform.system()
-    
+        self.CPU_COUNT = multiprocessing.cpu_count()
+        self.MAX_WORKERS = min(6, self.CPU_COUNT)  
     def _get_python_executable(self) -> str:
-        """Get the correct Python executable for the current platform"""
-        # Try to use the same Python interpreter that's running this script
-        python_exe = sys.executable
-        if python_exe and os.path.isfile(python_exe):
-            return python_exe
-        
-        # Fallback options by platform
-        if platform.system() == "Windows":
-            candidates = ["python.exe", "python3.exe", "py.exe"]
-        else:
-            candidates = ["python3", "python"]
-        
-        for candidate in candidates:
-            if shutil.which(candidate):
-                return candidate
-        
-        # Last resort - return python and let subprocess handle the error
-        return "python"
+            """Get the correct Python executable, avoiding the bundled app itself."""
+            # When frozen by PyInstaller, sys.executable is the app itself.
+            # We must avoid using it and find a real python interpreter.
+            is_frozen = getattr(sys, 'frozen', False)
+
+            if not is_frozen:
+                # If not frozen, it's safe to use the current interpreter.
+                python_exe = sys.executable
+                if python_exe and os.path.isfile(python_exe):
+                    return python_exe
+
+            # Fallback for frozen apps or if sys.executable is not found.
+            # Search for a python interpreter on the system's PATH.
+            if platform.system() == "Windows":
+                candidates = ["python.exe", "python3.exe"]
+            else:
+                candidates = ["python3", "python"]
+
+            for candidate in candidates:
+                if shutil.which(candidate):
+                    return candidate
+
+            # If no python is found, raise an error.
+            raise RuntimeError(
+                "Could not find a Python interpreter on the system PATH. "
+                "Python is required to run the scanner."
+            )
     
     def _find_pdfid(self) -> Optional[Path]:
         """Find pdfid.py with cross-platform path resolution"""
