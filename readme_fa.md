@@ -1,7 +1,7 @@
 # اسکنر تهدیدات PDF
 
 ![نسخه](https://img.shields.io/badge/Version-4.0.0-5865F2)
-![پلتفرم](https://img.shields.io/badge/Platform-Windows%20%7C%20macOS%20%7C%20Linux-blue)
+![پلتفرم](https://img.shields.io/badge/Platform-Windows%20%7C%20%20%20Linux-blue)
 ![لایسنس: MIT](https://img.shields.io/badge/License-MIT-blue.svg)
 
 یک نرم‌افزار مدرن و چندسکویی برای بررسی فایل‌های PDF از نظر تهدیدات امنیتی. این برنامه با استفاده از Python و PySide6 ساخته شده و رابط کاربری ساده و شیکی دارد که به شما کمک می‌کند قبل از باز کردن فایل‌های مشکوک، تهدیدات امنیتی را شناسایی کنید — مانند جاوااسکریپت‌های پنهان، اجرای خودکار، و لینک‌های خارجی.
